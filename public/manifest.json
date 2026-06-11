@@ -1,0 +1,18 @@
+{
+  "name": "LifeOS",
+  "short_name": "LifeOS",
+  "description": "Your health, habits, and goals — in one place.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F3EE",
+  "theme_color": "#F5664A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
