@@ -1,0 +1,159 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Aurora Glass — color tokens. Mirror theme.js {color, darkColor}. */
+:root {
+  --lifeos-color-primary: #0E0E10;
+  --lifeos-color-primary-light: rgba(14, 14, 16, 0.06);
+  --lifeos-color-accent: #F5664A;
+  --lifeos-color-accent-ink: #FFFFFF;
+  --lifeos-color-accent-light: rgba(245, 102, 74, 0.14);
+  --lifeos-color-success: #7FA67C;
+  --lifeos-color-success-light: #E8F4EC;
+  --lifeos-color-warning: #E5A148;
+  --lifeos-color-warning-light: #FCEEDB;
+  --lifeos-color-danger: #FF6B85;
+  --lifeos-color-danger-light: #FFE3E9;
+  --lifeos-color-background: #F5F3EE;
+  --lifeos-color-surface: rgba(255, 255, 255, 0.72);
+  --lifeos-color-surface-solid: #FFFFFF;
+  --lifeos-color-text: #0E0E10;
+  --lifeos-color-muted: #6B6B72;
+  --lifeos-color-border: rgba(14, 14, 16, 0.08);
+  --lifeos-color-glass-border: rgba(255, 255, 255, 0.55);
+
+  --lifeos-shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 16px 48px rgba(14, 14, 16, 0.08);
+
+  /* Aurora orb colors — drift behind glass. Light = peach + soft coral + sky */
+  --lifeos-orb-1: #FFD4B5;
+  --lifeos-orb-2: #FFB199;
+  --lifeos-orb-3: #B8DDFF;
+  --lifeos-orb-1-alpha: 0.55;
+  --lifeos-orb-2-alpha: 0.40;
+  --lifeos-orb-3-alpha: 0.45;
+}
+
+.dark {
+  --lifeos-color-primary: #F5F3EE;
+  --lifeos-color-primary-light: rgba(245, 243, 238, 0.08);
+  --lifeos-color-accent: #FF7E5F;
+  --lifeos-color-accent-ink: #0A1419;
+  --lifeos-color-accent-light: rgba(255, 126, 95, 0.18);
+  --lifeos-color-success: #A8C7A2;
+  --lifeos-color-success-light: rgba(168, 199, 162, 0.12);
+  --lifeos-color-warning: #F5B16E;
+  --lifeos-color-warning-light: rgba(245, 177, 110, 0.12);
+  --lifeos-color-danger: #FF7B92;
+  --lifeos-color-danger-light: rgba(255, 123, 146, 0.14);
+  --lifeos-color-background: #0A1419;
+  --lifeos-color-surface: rgba(255, 255, 255, 0.06);
+  --lifeos-color-surface-solid: #13202A;
+  --lifeos-color-text: #F5F3EE;
+  --lifeos-color-muted: #8B8B95;
+  --lifeos-color-border: rgba(245, 243, 238, 0.10);
+  --lifeos-color-glass-border: rgba(255, 255, 255, 0.10);
+
+  --lifeos-shadow-glass: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 16px 48px rgba(0, 0, 0, 0.4);
+
+  /* Dark aurora — violet + cyan + warm coral */
+  --lifeos-orb-1: #7C5CFF;
+  --lifeos-orb-2: #3FE9FF;
+  --lifeos-orb-3: #FF7E5F;
+  --lifeos-orb-1-alpha: 0.32;
+  --lifeos-orb-2-alpha: 0.26;
+  --lifeos-orb-3-alpha: 0.20;
+}
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+
+  body {
+    @apply text-text font-sans text-body;
+    background-color: var(--lifeos-color-background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior-y: none;
+  }
+
+  button, input, textarea, select {
+    font-family: inherit;
+  }
+
+  /* Subtle press feedback per CODING_STANDARDS.md §19 */
+  button:not(:disabled) {
+    transition: transform 120ms cubic-bezier(0.32, 0.72, 0, 1), opacity 120ms;
+  }
+  button:not(:disabled):active {
+    transform: scale(0.98);
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* Pages clear the fixed 44px TopBar plus the iOS safe-area inset. */
+  .page-clear-top {
+    padding-top: calc(env(safe-area-inset-top) + 56px);
+  }
+
+  /* Display family — restricted to display + heading + hero per CODING_STANDARDS.md §11 */
+  .font-display {
+    font-family: 'Fraunces', Georgia, serif;
+    font-feature-settings: 'ss01' 1;
+    font-variation-settings: 'opsz' 96, 'SOFT' 50;
+    letter-spacing: -0.02em;
+  }
+
+  /* Glass — every elevated surface uses this */
+  .glass {
+    background-color: var(--lifeos-color-surface);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    border: 1px solid var(--lifeos-color-glass-border);
+    box-shadow: var(--lifeos-shadow-glass);
+  }
+
+  .glass-solid {
+    background-color: var(--lifeos-color-surface-solid);
+    border: 1px solid var(--lifeos-color-border);
+    box-shadow: var(--lifeos-shadow-glass);
+  }
+
+  /* Coral accent ring */
+  .accent-ring {
+    box-shadow: 0 0 0 1px var(--lifeos-color-accent), 0 0 24px rgba(245, 102, 74, 0.25);
+  }
+
+  /* Notes journal glow — coral */
+  .journal-glow {
+    transition: box-shadow 320ms cubic-bezier(0.32, 0.72, 0, 1);
+  }
+  .journal-glow.is-active {
+    box-shadow: var(--lifeos-shadow-glass), inset 0 0 32px rgba(245, 102, 74, 0.18);
+  }
+  .dark .journal-glow.is-active {
+    box-shadow: var(--lifeos-shadow-glass), inset 0 0 40px rgba(255, 126, 95, 0.20);
+  }
+}
+
+/* Honor user motion preference. ND-friendly + accessibility win. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
